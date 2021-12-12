@@ -69,55 +69,56 @@ export default class App extends Component {
         });
     }
 
-    // createNewItem(param, id) {
-    //     this.setState(({data}) => {
-    //         const index = data.findIndex(elem => elem.id === id);
+    createNewItem(param, id) {
+        this.setState(() => {
+            const index = this.state.data.findIndex(elem => elem.id === id);
 
-    //         const old = data[index];
-    //         const newItem = {...old, param: !old.param}
-
-    //         const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-
-    //         return {
-    //             data: newArr
-    //         }
-    //     })
-    // }
-
-    onToogleImportant(id) {
-        // this.createNewItem = this.createNewItem.bind(this);
-
-        // this.createNewItem(this.state.data.important);
-        this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-
-            const old = data[index];
-            const newItem = {...old, important: !old.important}
-
-            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+            const old = this.state.data[index];
+            const newItem = {...old}
+            console.log(newItem);
+            newItem[param] = !old[param];
+            const newArr = [...this.state.data.slice(0, index), newItem, ...this.state.data.slice(index + 1)];
 
             return {
                 data: newArr
             }
-        })
+        });
+    }
+
+    onToogleImportant(id) {
+        this.createNewItem = this.createNewItem.bind(this);
+
+        this.createNewItem("important", id);
+        // this.setState(({data}) => {
+        //     const index = data.findIndex(elem => elem.id === id);
+
+        //     const old = data[index];
+        //     const newItem = {...old, important: !old.important}
+
+        //     const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+
+        //     return {
+        //         data: newArr
+        //     }
+        // })
     }
 
     onToogleLiked(id) {
         // this.createNewItem = this.createNewItem.bind(this);
 
-        // this.createNewItem(this.state.data.important);
-        this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
+        this.createNewItem("like", id);
+        // this.setState(({data}) => {
+        //     const index = data.findIndex(elem => elem.id === id);
 
-            const old = data[index];
-            const newItem = {...old, like: !old.like}
+        //     const old = data[index];
+        //     const newItem = {...old, like: !old.like}
 
-            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+        //     const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
 
-            return {
-                data: newArr
-            }
-        })
+        //     return {
+        //         data: newArr
+        //     }
+        // })
     }
 
     render(){
